@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  custom_node_app_1:
+    build: .
+    image: "custom_node_app_1"
+    container_name: "container-name-compose-1"
+    ports:
+      - "8081:8080"
