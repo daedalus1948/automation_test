@@ -1,0 +1,22 @@
+on:
+  push:
+    branches: ['deploy']
+
+
+jobs:  
+  deploy:
+    name: deploy_image_to_vps
+    runs-on: self-hosted
+    steps:
+    - name: login to server, fetch docker image from github registry, run
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_PRIVATE_KEY }}
+        script: |
+          echo "login successful"
+          cd /home/johndoe/projects/cicd_test
+          git checkout master
+          git pull
+          docker-compose up --build -d
