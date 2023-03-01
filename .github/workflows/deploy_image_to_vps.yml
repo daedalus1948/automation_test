@@ -8,11 +8,13 @@ jobs:
     name: deploy_image_on_VPS_
     runs-on: self-hosted
     steps:
-    - name: login to server, fetch docker image from github registry, run
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_PRIVATE_KEY }}
-        script: |
-          echo "login successful"
+    - name: Setup github runner with ssh, login to remote server
+      # https://stackoverflow.com/a/70447517
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login"
+    - name: cleanup
+      run: rm -rf ~/.ssh
