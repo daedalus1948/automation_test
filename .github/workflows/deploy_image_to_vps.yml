@@ -5,7 +5,7 @@ on:
 
 jobs:  
   deploy:
-    name: deploy_image_on_VPS_
+    name: deploy_image_on_VPS
     runs-on: self-hosted
     steps:
     - name: Setup github runner with ssh, login to remote server
@@ -15,6 +15,6 @@ jobs:
         echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
-      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login"
+      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login && mkdir runner-test"
     - name: cleanup
       run: rm -rf ~/.ssh
