@@ -16,5 +16,3 @@ jobs:
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
       run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login && mkdir runner-test"
-    - name: cleanup
-      run: rm -rf ~/.ssh
