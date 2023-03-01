@@ -16,7 +16,3 @@ jobs:
         key: ${{ secrets.VPS_PRIVATE_KEY }}
         script: |
           echo "login successful"
-          cd /home/johndoe/projects/cicd_test
-          git checkout master
-          git pull
-          docker-compose up --build -d
