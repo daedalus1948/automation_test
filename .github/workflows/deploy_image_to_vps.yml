@@ -5,14 +5,16 @@ on:
 
 jobs:  
   deploy:
-    name: deploy_image_on_VPS
+    name: Deploy image to vps
     runs-on: self-hosted
     steps:
-    - name: Setup github runner with ssh, login to remote server
+    - name: Setup github runner with ssh
       # https://stackoverflow.com/a/70447517
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
         echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
+    - name: login to remote server
       run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login && mkdir runner-test"
+    - name: remove ssh directory after 
+      run: rm -rf ~/.ssh

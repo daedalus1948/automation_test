@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: appserver
   become: true
   vars:
     created_username: ansible
