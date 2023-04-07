@@ -1,3 +1,5 @@
+name: Deploy Service to VPS
+
 on:
   push:
     branches: ['deploy']
