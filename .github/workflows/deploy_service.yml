@@ -15,6 +15,6 @@ jobs:
         echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
     - name: login to remote server
-      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo login"
+      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "docker-compose up"
     - name: remove ssh directory after 
       run: rm -rf ~/.ssh
