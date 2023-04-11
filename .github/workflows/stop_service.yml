@@ -3,11 +3,14 @@ name: Stop Service
 on: 
   workflow_dispatch: # manually trigger workflow via github actions web interface
 
+env:
+  APP_NAME: app1
+
 jobs:
   stop_service:
     name: Stop Service
     runs-on: self-hosted
     steps:
-      - name: test stop service
-        run: echo "test stop service"
+      - name: Stop Service
+        run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "sudo docker stop $APP_NAME"
 
