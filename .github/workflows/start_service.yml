@@ -1,4 +1,13 @@
 name: Start Service
 
-on: workflow_dispatch # manually trigger workflow via github actions web interface
+on: 
+  workflow_dispatch: # manually trigger workflow via github actions web interface
+
+jobs:
+  start_service:
+    name: Start Service
+    runs-on: self-hosted
+    steps:
+      - name: test start service
+        run: "echo test start service"
 

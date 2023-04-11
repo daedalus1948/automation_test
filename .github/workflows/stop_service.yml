@@ -1,4 +1,13 @@
 name: Stop Service
 
-on: workflow_dispatch # manually trigger workflow via github actions web interface
+on: 
+  workflow_dispatch: # manually trigger workflow via github actions web interface
+
+jobs:
+  stop_service:
+    name: Stop Service
+    runs-on: self-hosted
+    steps:
+      - name: test stop service
+        run: echo "test stop service"
 
