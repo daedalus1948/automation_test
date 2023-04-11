@@ -4,6 +4,9 @@ on:
   push:
     branches: ['deploy']
 
+env:
+  APP_NAME: App1
+
 jobs:  
   deploy:
     name: Deploy image to vps
@@ -16,10 +19,10 @@ jobs:
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
     - name: login to remote server
       run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
-        sudo docker kill app1 &&
-        sudo docker rm app1 &&
+        sudo docker kill $APP_NAME &&
+        sudo docker rm $APP_NAME &&
         sudo docker rmi ghcr.io/daedalus1948/automation_test:release &&
         sudo docker pull ghcr.io/daedalus1948/automation_test:release && 
-        sudo docker run -d -p 8080:8080 --name app1 ghcr.io/daedalus1948/automation_test:release"
+        sudo docker run -d -p 8080:8080 --name $APP_NAME ghcr.io/daedalus1948/automation_test:release"
     - name: remove ssh directory after 
       run: rm -rf ~/.ssh
