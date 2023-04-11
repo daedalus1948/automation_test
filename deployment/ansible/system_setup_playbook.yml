@@ -11,7 +11,7 @@
         state: latest
         update_cache: true
 
-    - name: Update apt and install required system packages
+    - name: Install required system packages
       apt:
         pkg:
           - curl
@@ -44,6 +44,12 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+
+    - name: Install Docker-compose
+      get_url:
+        url : https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-aarch64 # ARM BASED LINUX!
+        dest: /usr/local/bin/docker-compose
+        mode: '755'
 
     - name: Disable password authentication for root
       lineinfile:
