@@ -15,6 +15,6 @@ jobs:
         echo "${{ secrets.VPS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.VPS_HOST }} > ~/.ssh/known_hosts
     - name: login to remote server
-      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "docker pull ghcr.io/daedalus1948/automation_test:release"
+      run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "sudo docker pull ghcr.io/daedalus1948/automation_test:release"
     - name: remove ssh directory after 
       run: rm -rf ~/.ssh
